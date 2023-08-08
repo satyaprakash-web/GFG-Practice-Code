@@ -1,0 +1,39 @@
+class Solution
+{
+public:
+    // Function to check if two strings are isomorphic.
+    bool areIsomorphic(string str1, string str2) {
+        // Get the length of both input strings.
+        int n = str1.length();
+        int m = str2.length();
+
+        if (n != m)
+            return false;
+
+        // Create an unordered map to store character mappings from str1 to str2.
+        unordered_map<char, char> mpp;
+
+        for (int i = 0; i < n; i++) {
+            // If the current character from str1 is not yet mapped.
+            if (!mpp.count(str1[i])) {
+                // Check if the corresponding character in str2 is already used in mapping.
+                for (auto it : mpp) {
+                    if (it.second == str2[i]) {
+                        return false; // If yes, the strings are not isomorphic.
+                    }
+                }
+                // If not, create a mapping from str1[i] to str2[i].
+                mpp[str1[i]] = str2[i];
+            } else {
+                // If the character from str1 is already mapped.
+                // Check if the mapping matches the character in str2.
+                if (mpp[str1[i]] != str2[i]) {
+                    return false; // If not, the strings are not isomorphic.
+                }
+            }
+        }
+
+        // If all character mappings are valid, the strings are isomorphic.
+        return true;
+    }
+};
