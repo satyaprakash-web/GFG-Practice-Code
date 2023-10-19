@@ -1,0 +1,13 @@
+void MyStack :: push(int x) {
+top++;
+arr[top]=x;
+}
+
+int MyStack :: pop(){
+if(top != -1){
+int ans = arr[top];
+top--;
+return ans;
+} else 
+return -1;
+}
