@@ -1,0 +1,25 @@
+// Longest Palindromic Subsequence
+
+class Solution {
+  public:
+    int longestPalinSubseq(string &s) {
+        int n = s.size();
+        string sRev = s;
+        reverse(sRev.begin(), sRev.end());
+
+        vector<int> prev(n + 1, 0), curr(n + 1, 0);
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (s[i - 1] == sRev[j - 1]) {
+                    curr[j] = 1 + prev[j - 1];
+                } else {
+                    curr[j] = max(prev[j], curr[j - 1]);
+                }
+            }
+            prev = curr;  // Move current row to previous row
+        }
+
+        return prev[n]; // Length of the longest palindromic subsequence
+    }
+};
